@@ -14,31 +14,45 @@ void SolveTask(const Coefficients* params)
 
         if (D < 0)
         {
-            puts("Корней нет.\n");
+            puts(NO_SLN);
         }
         else if (D == 0)
         {
             x1 = (-params->b) / (2 * params->a);
-            printf("Уравнение имеет один корень: x = %.6f\n\n", x1);
+
+            if (x1 == -0.0)
+                x1 = 0.0;
+
+            printf( ONE_SLN(x1) );
         }
         else
         {
             D  = sqrt(D);
             x1 = (-params->b + D) / (2 * params->a);
             x2 = (-params->b - D) / (2 * params->a);
-            printf("Уравнение имеет два кореня: x1 = %.6f, x2 = %.6f\n\n", x1, x2);
+
+            if (x1 == -0.0)
+                x1 = 0.0;
+            if (x2 == -0.0)
+                x2 = 0.0;
+
+            printf( TWO_SLN(x1, x2) );
         }
     }
     else if (params->b != 0)
     {
         x1 = (-params->c) / params->b;
-        printf("Уравнение имеет один корень: x = %.6f\n\n", x1);
+
+        if (x1 == -0.0)
+            x1 = 0.0;
+
+        printf( ONE_SLN(x1) );
     }
     else
     {
         if (params->c == 0)
-            puts("Уравнение имеет бесконечно много корней.\n");
+            puts(INF_SLN);
         else
-            puts("Корней нет.\n");
+            puts(NO_SLN);
     }
 }

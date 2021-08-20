@@ -18,4 +18,9 @@
 */
 void SolveTask(const Coefficients* params);
 
+#define NO_SLN              "Корней нет.\n"
+#define ONE_SLN(ans)        "Уравнение имеет один корень: x = %lg\n\n", ans
+#define TWO_SLN(ans1, ans2) "Уравнение имеет два кореня: x1 = %lg, x2 = %lg\n\n", ans1, ans2
+#define INF_SLN             "Уравнение имеет бесконечно много корней.\n"
+
 #endif // !PARESE_H_

@@ -143,7 +143,7 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
 
             if (CompareNumbers((double)ipower, power) == false)
             {
-                printf("Вводите только целые степени параметров. Степень %.6f является ошибочной.\n\n", power);
+                printf("Вводите только целые степени параметров. Степень %lg является ошибочной.\n\n", power);
                 return nullptr;
             }
 
@@ -262,13 +262,13 @@ void ParamWarning(ParamType paramType, double oldNumber, double newNumber)
     switch (paramType)
     {
     case X_0:
-        printf("Вводите только один свободный член уравнения. Старое значение %.6f было заменено на новое %.6f\n", oldNumber, newNumber);
+        printf("Вводите только один свободный член уравнения. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
         break;
     case X_1:
-        printf("Вводите x^1 только один раз. Старое значение %.6f было заменено на новое %.6f\n", oldNumber, newNumber);
+        printf("Вводите x^1 только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
         break;
     case X_2:
-        printf("Вводите x^2 только один раз. Старое значение %.6f было заменено на новое %.6f\n", oldNumber, newNumber);
+        printf("Вводите x^2 только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
         break;
     }
 }

@@ -1,14 +1,14 @@
-﻿#include <string.h>
-#include <stdio.h>
+﻿#include <stdio.h>
+#include <string.h>
 
 #include "..\inc\io.h"
 
-char* GetString(char* buffer, int length)
+char* GetString(char* buffer, int length, FILE* stream)
 {
     char* result = nullptr;
     char* index  = nullptr;
 
-    result = fgets(buffer, length, stdin);
+    result = fgets(buffer, length, stream);
 
     if (result)
     {
