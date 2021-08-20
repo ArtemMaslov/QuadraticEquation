@@ -1,10 +1,14 @@
 ﻿#include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 #include "..\inc\io.h"
 
 char* GetString(char* buffer, int length, FILE* stream)
 {
+    assert(buffer);
+    assert(stream);
+
     char* result = nullptr;
     char* index  = nullptr;
 

@@ -2,12 +2,16 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <cmath>
+#include <assert.h>
 
 #include "..\inc\parse.h"
 //***\\---//***\\-----//***\\---//***\\
 
 Coefficients* ParseString(const char* buffer, Coefficients* params)
 {
+    assert(buffer);
+    assert(params);
+
     ParseFlags flags = { 0,0,0 };
 
     double     number    = 0;
@@ -71,6 +75,8 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
 
 bool ParseEnding(const char** buffer)
 {
+    assert(buffer);
+
     bool warning    = false;
     bool zeroInText = false;
 
@@ -109,6 +115,9 @@ bool ParseEnding(const char** buffer)
 
 ParamType* ParseNextParam(const char** buffer, char* paramName)
 {
+    assert(buffer);
+    assert(paramName);
+
     ParamType paramType = X_0;
 
     while (**buffer)
@@ -184,6 +193,9 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
 
 bool ParseNextNumber(const char** buffer, double* number)
 {
+    assert(buffer);
+    assert(number);
+
     const char* start         = nullptr;
     const char* end           = nullptr;
     double      sign          = 1.0;
@@ -233,6 +245,9 @@ bool ParseNextNumber(const char** buffer, double* number)
 
 double ConvertToDouble(const char* start, const char* end)
 {
+    assert(start);
+    assert(end);
+
     double number                = 0;
     double numbersAfterSeparator = 1;
     bool   separator             = false;

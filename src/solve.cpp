@@ -1,10 +1,13 @@
 ﻿#include <stdio.h>
 #include <cmath>
+#include <assert.h>
 
 #include "..\inc\solve.h"
 
 void SolveTask(const Coefficients* params)
 {
+    assert(params);
+
     double x1 = 0;
     double x2 = 0;
 
