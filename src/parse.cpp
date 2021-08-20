@@ -230,7 +230,7 @@ bool ParseNextNumber(const char** buffer, double* number)
         }
         else if (isalpha(**buffer) && !numberStarted)
         {
-            *number = 1.0;
+            *number = sign;
             return true;
         }
         else if (isdigit(**buffer) == false)
