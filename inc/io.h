@@ -13,4 +13,12 @@
 */
 char* GetString(char* buffer, int length, FILE* stream);
 
+
+/**
+* \brief Функция выводит на экран корни уравнения
+*
+* \param[in] params Коэффициенты квадратного уравнения.
+*/
+void PrintSolution(Coefficients* params);
+
 #endif // !PARESE_H_

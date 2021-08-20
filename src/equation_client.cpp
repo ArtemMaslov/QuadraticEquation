@@ -22,7 +22,10 @@ void EquationClient()
         pparams = ParseString(buffer, &params);
 
         if (pparams)
-            SolveTask(pparams);
+        {
+            Coefficients roots = SolveTask(pparams);
+            PrintSolution(&roots);
+        }
 
         puts("Введите следующее квадратное уравнение в привидённом виде (ax^2+bx+c=0). Пустая строка для завершения:");
     }

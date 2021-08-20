@@ -3,59 +3,61 @@
 #include <assert.h>
 
 #include "..\inc\solve.h"
+#include "..\inc\parse.h"
 
-void SolveTask(const Coefficients* params)
+Coefficients SolveTask(const Coefficients* params)
 {
     assert(params);
 
-    double x1 = 0;
-    double x2 = 0;
+    Coefficients result = { 0,0,0 };
 
-    if (params->a != 0)
+    if (CompareNumbers(params->a, 0.0) == false)
     {
         double D = (params->b * params->b) - (4 * params->a * params->c);
 
         if (D < 0)
         {
-            puts(NO_SLN);
+            result.c = NO_SOLUTIONS;
         }
-        else if (D == 0)
+        else if (CompareNumbers(D, 0.0))
         {
-            x1 = (-params->b) / (2 * params->a);
+            result.a = (-params->b) / (2 * params->a);
 
-            if (x1 == -0.0)
-                x1 = 0.0;
+            if (result.a == -0.0)
+                result.a = 0.0;
 
-            printf( ONE_SLN(x1) );
+            result.c = ONE_SOLUTION;
         }
         else
         {
             D  = sqrt(D);
-            x1 = (-params->b + D) / (2 * params->a);
-            x2 = (-params->b - D) / (2 * params->a);
+            result.a = (-params->b + D) / (2 * params->a);
+            result.b = (-params->b - D) / (2 * params->a);
 
-            if (x1 == -0.0)
-                x1 = 0.0;
-            if (x2 == -0.0)
-                x2 = 0.0;
+            if (result.a == -0.0)
+                result.a = 0.0;
+            if (result.b == -0.0)
+                result.b = 0.0;
 
-            printf( TWO_SLN(x1, x2) );
+            result.c = TWO_SOLUTIONS;
         }
     }
-    else if (params->b != 0)
+    else if (CompareNumbers(params->b, 0.0) == false)
     {
-        x1 = (-params->c) / params->b;
+        result.a = (-params->c) / params->b;
 
-        if (x1 == -0.0)
-            x1 = 0.0;
+        if (result.a == -0.0)
+            result.a = 0.0;
 
-        printf( ONE_SLN(x1) );
+        result.c = ONE_SOLUTION;
     }
     else
     {
-        if (params->c == 0)
-            puts(INF_SLN);
+        if (CompareNumbers(params->c, 0.0) == true)
+            result.c = INF_SOLUTIONS;
         else
-            puts(NO_SLN);
+            result.c = NO_SOLUTIONS;
     }
+
+    return result;
 }

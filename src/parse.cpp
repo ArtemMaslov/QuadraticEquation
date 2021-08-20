@@ -76,6 +76,7 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
 bool ParseEnding(const char** buffer)
 {
     assert(buffer);
+    assert(*buffer);
 
     bool warning    = false;
     bool zeroInText = false;
@@ -116,6 +117,7 @@ bool ParseEnding(const char** buffer)
 ParamType* ParseNextParam(const char** buffer, char* paramName)
 {
     assert(buffer);
+    assert(*buffer);
     assert(paramName);
 
     ParamType paramType = X_0;
@@ -194,6 +196,7 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
 bool ParseNextNumber(const char** buffer, double* number)
 {
     assert(buffer);
+    assert(*buffer);
     assert(number);
 
     const char* start         = nullptr;
@@ -297,7 +300,7 @@ bool IsSeparator(char c)
 
 bool CompareNumbers(double a, double b)
 {
-    return (abs(a - b) <= 1.e-6);
+    return (fabs(a - b) < epsilon);
 }
 
 bool IsSign(char c)
