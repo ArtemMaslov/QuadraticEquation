@@ -1,104 +1,109 @@
+/**
+* \file
+* \brief Parser functions file
+*/
 #ifndef PARSE_H_
 #define PARSE_H_
 
-#include "main.h"
+#include "config.h"
 
 /**
-* \brief Главная функция парсинга строки
+* \brief String parsing function.
 *
-* Функция анализирует строку и вычисляет коэффициенты. Уравнение должно быть записано в виде ax^2+bx+c=0.
-* Символы умножения '*' и деления '/' в входной строке не допускаются. 
-* Ввод 2*x^2-1=0 является не правильным, нужно писать 2x^2-1=0.
-* Каждый параметр может встречаться только один раз, иначе в вычислениях будет применяться последний.
-* В примере 2x^2+x^2-1=0, 2x^2 будет проигнорированно, программа выведет корни -1; 1.
+* The function anlyzes the string and calculates the coefficients. The equation should be written as ax^2+bx+c=0.
 * 
-* \param[in,out] params Указатель структуру коэффициентов квадратного уравнения.
-* \param[in]     buffer Входная строка
+* \param[in,out] params Pointer to the structure of the coefficients of a quadratic equation.
+* \param[in]     buffer Input string.
 * 
-* \return Возвращает указатель на структуру. nullptr в случае ошибки.
+* \return Pointer to the structer. `nullptr` in case of an error.
 */
 Coefficients* ParseString(const char* buffer, Coefficients* params);
 
 /**
-* \brief Функция поиска числа в строке
+* \brief The function searches a next number in the string.
 *
-* Функция ищет в строке первое слева число в строке, и устанавливает указатель buffer на следующий за числом символ.
+* The function searches in the string the first number from the left and 
+* sets the buffer pointer to the next symbol in the string.
 * 
-* \param[out] number Указатель на слудеющее в строке число
-* \param[in]  buffer Входная строка
+* \param[out] number Pointer to a number in the string.
+* \param[in]  buffer Input string.
 * 
-* \return false в случае ошибки, true в случае успешного выполнения
+* \return false in case of an error, true in case of correct exit.
 */
 bool ParseNextNumber(const char** buffer, double* number);
 
 /**
-* \brief Функция поиска параметра в строке
+* \brief The function searches a next parameter in the string.
 *
-* Функция пищет первый слева параметр в строке, и устанавливает указатель buffer на следующий за параметром символ.
+* The function searches in the line the first parameter from the left and 
+* sets the buffer pointer to the next symbol in the line.
 * 
-* \param[in] paramName Символ параметра (a, b, x, ...), встречавшеося до этого в строке. '\0' если функция вызывается впервые.
-* \param[in] buffer Входная строка
+* \param[in] paramName Parameter symbol (a, b, x, ...), met before in the line. '\0' if the function is called for the first time.
+* \param[in] buffer Input string.
 * 
-* \return указатель на тип параметра (x^2, x или свободный член)
+* \return Pointer to the parameter type (x^2, x or free member), `nullptr` in case of an error.
 */
 ParamType* ParseNextParam(const char** buffer, char* paramName);
 
 /**
-* \brief Функция обработки окончания строки
+* \brief Function for processing the end of a line.
 *
-* Функция обрабатывает символы после знака '='. Выдаёт предупреждение, если ввод не оканчивается на "= 0".
+* The function processes characters after the '=' sign. Issues a warning if the input does not end with "=0".
 * 
-* \param[in] buffer  Входная строка
+* \param[in] buffer Input string.
 */
 bool ParseEnding(const char** buffer);
 
 /**
-* \brief Функция перевода строки цифр в double
+* \brief Function for converting a string of digits to double.
 *
-* Функция переводит строку цифр в double.
+* The function converts a string of digits to a double.
 * 
-* \param[in] start Указатель на первый символ числа
-* \param[in] end Указатель на послений символ числа
+* \param[in] start Pointer to the first character of the number.
+* \param[in] end   Pointer to the last character of the number.
 * 
-* \return Возвращает полученное число
+* \return The received number.
 */
 double ConvertToDouble(const char* start, const char* end);
 
 /**
-* \brief Функция выводит предупреждение о двойном использовании параметров
+* \brief Function displays a warning about the double use of parameters.
 *
-* Функция выводит предупреждение, что введены два параметра. Например 2x+10x-1=0. Функция выведет, что значение 2x будет проигнорированно.
+* The function displays a warning that two parameters have been entered. 
+* For example, in input `2x+10x-1=0` function will output that the value `2x` will be ignored.
 * 
-* \param[in] paramType Тип параметра (x^2, x, свободный член)
-* \param[in] oldNumber Старое значение параметра
-* \param[in] newNumber Новое значение параметра
+* \param[in] paramType Parameter type (x^2, x or free member).
+* \param[in] oldNumber The old value of the parameter.
+* \param[in] newNumber The new value of the parameter.
 */
 void ParamWarning(ParamType paramType, double oldNumber, double newNumber);
 
 /**
-* \brief Функция, определяющая является ли символ точкой или запятой
+* \brief Function that determines wheter a character is a separator.
 * 
-* \param[in] c Проверяемый символ
+* \param[in] c The checked character.
 * 
-* \return true, если символ точка или запятая
+* \return true, if the character is a dot or comma.
 */
 bool IsSeparator(char c);
 
 /**
-* \brief Функция, сравнивающая два числа
+* \brief Function that compare numbers
 * 
-* \param[in] a,b Сравниваемые числа
+* The function uses `Epsilon` to determine equal numbers.
 * 
-* \return true, если числа равны
+* \param[in] a,b The compared numbers.
+* 
+* \return true, is numbers are equal.
 */
 bool CompareNumbers(double a, double b);
 
 /**
-* \brief Функция, определяющая является ли символ '+' или '-'
+* \brief Function that determines wheter the character is '+' or '-'.
 * 
-* \param[in] c Проверяемый символ
+* \param[in] c The checked character.
 * 
-* \return true, если символ '+' или '-'
+* \return true, if the character is '+' or '-'.
 */
 bool IsSign(char c);
 

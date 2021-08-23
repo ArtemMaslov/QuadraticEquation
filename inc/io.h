@@ -1,24 +1,28 @@
-﻿#ifndef IO_H_
+﻿/**
+* \file
+* \brief Input, output functions file
+*/
+#ifndef IO_H_
 #define IO_H_
 
-#include "main.h"
+#include "config.h"
 
 /**
-* \brief Функция чтения строки
+* \brief Input reading function.
 *
-* Функция читает строку в buffer.
-* \param[out] buffer Входная строка
-* \param[in]  length Максимальная длина строки (размер буфера)
-* \param[in]  stream Поток, откуда функция читает данные
+* The function reads the following line from the input buffer.
+* \param[out] buffer Input line.
+* \param[in]  length Maximum line length (buffer size).
+* \param[in]  stream Input stream.
 */
 char* GetString(char* buffer, int length, FILE* stream);
 
 
 /**
-* \brief Функция выводит на экран корни уравнения
+* \brief The function outputs the roots of the equation.
 *
-* \param[in] params Коэффициенты квадратного уравнения.
+* \param[in] params Coefficients of the quadratic equation.
 */
-void PrintSolution(Coefficients* params);
+void PrintSolution(Solution* params);
 
 #endif // !PARESE_H_

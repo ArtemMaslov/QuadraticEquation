@@ -6,8 +6,8 @@
 
 void EquationClient()
 {
-    char   buffer[MaxLength];
-    Coefficients  params = { 0,0,0 };
+    char          buffer[MaxLength] = { 0 };
+    Coefficients  params  = { 0, 0, 0 };
     Coefficients* pparams = &params;
 
     puts("Программа решает квадратные уравнения. Пример ввода:"
@@ -18,12 +18,12 @@ void EquationClient()
 
     while (GetString(buffer, MaxLength, stdin))
     {
-        params = { 0,0,0 };
+        params = { 0, 0, 0 };
         pparams = ParseString(buffer, &params);
 
         if (pparams)
         {
-            Coefficients roots = SolveTask(pparams);
+            Solution roots = SolveTask(pparams);
             PrintSolution(&roots);
         }
 

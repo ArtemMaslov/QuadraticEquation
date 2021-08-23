@@ -12,7 +12,7 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
     assert(buffer);
     assert(params);
 
-    ParseFlags flags = { 0,0,0 };
+    ParseFlags flags = { 0, 0, 0 };
 
     double     number    = 0;
     ParamType* paramType = nullptr;
@@ -86,6 +86,7 @@ bool ParseEnding(const char** buffer)
         if (isspace(**buffer))//Пропускаем пробельные символы
         {
             buffer++;
+            assert(*buffer);
             continue;
         }
 
@@ -102,6 +103,7 @@ bool ParseEnding(const char** buffer)
             zeroInText = true;
 
         (*buffer)++;
+        assert(*buffer);
     }
 
     if (warning)
@@ -127,6 +129,7 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
         if (isspace(**buffer))//Пропускаем пробельные символы
         {
             (*buffer)++;
+            assert(*buffer);
             continue;
         }
 
@@ -186,6 +189,7 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
         }
 
         (*buffer)++;
+        assert(*buffer);
     }
 
     return &paramType;
@@ -209,37 +213,55 @@ bool ParseNextNumber(const char** buffer, double* number)
         if (isspace(**buffer))//Пропускаем пробельные символы
         {
             (*buffer)++;
+            assert(*buffer);
             continue;
         }
 
-        if (isdigit(**buffer) && !numberStarted)
+        if (numberStarted)
         {
-            start         = *buffer;
-            numberStarted = true;
+
+            if (isdigit(**buffer))
+                ;
+            else if (IsSeparator(**buffer))
+                ;
+            else if (IsSeparator(**buffer) == false && isdigit(**buffer) == false)
+            {
+                end = *buffer - 1;
+                *number = ConvertToDouble(start, end) * sign;
+                return true;
+            }
+            else
+            {
+                printf("Ошибка ввода. Некорректный символ '%c'.\n\n", **buffer);
+                return false;
+            }
         }
-        else if (isdigit(**buffer) == false && numberStarted)
+        else
         {
-            end     = *buffer - 1;
-            *number = ConvertToDouble(start, end) * sign;
-            return true;
-        }
-        else if (IsSign(**buffer) && !numberStarted)
-        {
-            if (**buffer == '-')
-                sign *= -1.0;
-        }
-        else if (isalpha(**buffer) && !numberStarted)
-        {
-            *number = sign;
-            return true;
-        }
-        else if (isdigit(**buffer) == false)
-        {
-            printf("Ошибка ввода. Символ '%c' встречается не в том месте.\n\n", **buffer);
-            return false;
+            if (isdigit(**buffer))
+            {
+                start = *buffer;
+                numberStarted = true;
+            }
+            else if (IsSign(**buffer))
+            {
+                if (**buffer == '-')
+                    sign *= -1.0;
+            }
+            else if (isalpha(**buffer))
+            {
+                *number = sign;
+                return true;
+            }
+            else
+            {
+                printf("Ошибка ввода. Некорректный символ '%c'.\n\n", **buffer);
+                return false;
+            }
         }
 
         (*buffer)++;
+        assert(*buffer);
     }
     return false;
 }
@@ -251,16 +273,33 @@ double ConvertToDouble(const char* start, const char* end)
     assert(start);
     assert(end);
 
-    double number                = 0;
-    double numbersAfterSeparator = 1;
-    bool   separator             = false;
+    double number = 0;
+    bool separator = false;
+    int digitsAfterSeparator = 0;
+    double k = 1; // coefficient, which equal 10 to power of digitsAfterSeparator.
 
     while (start <= end)
     {
         if (isdigit(*start))
         {
             if (separator)
-                numbersAfterSeparator *= 10;
+            {
+                if (0.1/k < MinCompareValue)
+                {
+                    char* snumber = (char*)calloc(end - start + 1, sizeof(char));
+
+                    if(snumber)
+                        snumber = (char*)memcpy(snumber, start, end - start + 1);
+                    if(snumber)
+                        printf("Число %s введено с очень большой точностью, оно будет обрезано до %lg. Можно вводить только %d цифр после запятой.\n\n", snumber, number / k, digitsAfterSeparator);
+                    else
+                        printf("Введено число с очень большой точностью, оно будет обрезано до %lg. Можно вводить только %d цифр после запятой.\n\n", number / k, digitsAfterSeparator);
+                    break;
+                }
+
+                digitsAfterSeparator++;
+                k *= 10;
+            }
             number = 10 * number + *start - '0';
         }
 
@@ -270,7 +309,7 @@ double ConvertToDouble(const char* start, const char* end)
         start++;
     }
 
-    return number / numbersAfterSeparator;
+    return number / k;
 }
 
 //***\\---//***\\-----//***\\---//***\\
@@ -283,7 +322,7 @@ void ParamWarning(ParamType paramType, double oldNumber, double newNumber)
         printf("Вводите только один свободный член уравнения. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
         break;
     case X_1:
-        printf("Вводите x^1 только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
+        printf("Вводите x только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
         break;
     case X_2:
         printf("Вводите x^2 только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
@@ -300,7 +339,7 @@ bool IsSeparator(char c)
 
 bool CompareNumbers(double a, double b)
 {
-    return (fabs(a - b) < epsilon);
+    return (fabs(a - b) < MinCompareValue);
 }
 
 bool IsSign(char c)

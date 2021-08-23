@@ -1,0 +1,219 @@
+\hypertarget{parse_8h}{}\doxysection{inc/parse.h File Reference}
+\label{parse_8h}\index{inc/parse.h@{inc/parse.h}}
+
+
+Parser functions file.  
+
+
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_coefficients}{Coefficients}} $\ast$ \mbox{\hyperlink{parse_8h_a28390832b542bc52a7e5d8bedeb1fbd8}{Parse\+String}} (const char $\ast$buffer, \mbox{\hyperlink{struct_coefficients}{Coefficients}} $\ast$params)
+\begin{DoxyCompactList}\small\item\em String parsing function. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{parse_8h_a4eb0d39419b7263430baa1bcf6531095}{Parse\+Next\+Number}} (const char $\ast$$\ast$buffer, double $\ast$number)
+\begin{DoxyCompactList}\small\item\em The function searches a next number in the string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{config_8h_a3a023c0c27667e78ae521eb64f1c7c81}{Param\+Type}} $\ast$ \mbox{\hyperlink{parse_8h_a1d0828556ec1ef02224b749da6dba690}{Parse\+Next\+Param}} (const char $\ast$$\ast$buffer, char $\ast$param\+Name)
+\begin{DoxyCompactList}\small\item\em The function searches a next parameter in the string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{parse_8h_ace0513aa3fec5a8e9a7c31538c692a7d}{Parse\+Ending}} (const char $\ast$$\ast$buffer)
+\begin{DoxyCompactList}\small\item\em Function for processing the end of a line. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{parse_8h_a1140ec9eaefc7bea354788973d47a79b}{Convert\+To\+Double}} (const char $\ast$start, const char $\ast$end)
+\begin{DoxyCompactList}\small\item\em Function for converting a string of digits to double. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{parse_8h_ab02e2574e4b538dba9334c0263b57464}{Param\+Warning}} (\mbox{\hyperlink{config_8h_a3a023c0c27667e78ae521eb64f1c7c81}{Param\+Type}} param\+Type, double old\+Number, double new\+Number)
+\begin{DoxyCompactList}\small\item\em Function displays a warning about the double use of parameters. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{parse_8h_a8ab55f12a4dd0fca038c0c1b82b03fe3}{Is\+Separator}} (char c)
+\begin{DoxyCompactList}\small\item\em Function that determines wheter a character is a separator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{parse_8h_a4e74342866d71e78b540b6b0d530bea7}{Compare\+Numbers}} (double a, double b)
+\begin{DoxyCompactList}\small\item\em Function that compare numbers. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{parse_8h_a1325b94713161927277eb2e502e021f2}{Is\+Sign}} (char c)
+\begin{DoxyCompactList}\small\item\em Function that determines wheter the character is \textquotesingle{}+\textquotesingle{} or \textquotesingle{}-\/\textquotesingle{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parser functions file. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{parse_8h_a4e74342866d71e78b540b6b0d530bea7}\label{parse_8h_a4e74342866d71e78b540b6b0d530bea7}} 
+\index{parse.h@{parse.h}!CompareNumbers@{CompareNumbers}}
+\index{CompareNumbers@{CompareNumbers}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{CompareNumbers()}{CompareNumbers()}}
+{\footnotesize\ttfamily bool Compare\+Numbers (\begin{DoxyParamCaption}\item[{double}]{a,  }\item[{double}]{b }\end{DoxyParamCaption})}
+
+
+
+Function that compare numbers. 
+
+The function uses {\ttfamily Epsilon} to determine equal numbers.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em a,b} & The compared numbers.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, is numbers are equal. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_a1140ec9eaefc7bea354788973d47a79b}\label{parse_8h_a1140ec9eaefc7bea354788973d47a79b}} 
+\index{parse.h@{parse.h}!ConvertToDouble@{ConvertToDouble}}
+\index{ConvertToDouble@{ConvertToDouble}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ConvertToDouble()}{ConvertToDouble()}}
+{\footnotesize\ttfamily double Convert\+To\+Double (\begin{DoxyParamCaption}\item[{const char $\ast$}]{start,  }\item[{const char $\ast$}]{end }\end{DoxyParamCaption})}
+
+
+
+Function for converting a string of digits to double. 
+
+The function converts a string of digits to a double.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em start} & Pointer to the first character of the number. \\
+\hline
+\mbox{\texttt{ in}}  & {\em end} & Pointer to the last character of the number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The received number. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_a8ab55f12a4dd0fca038c0c1b82b03fe3}\label{parse_8h_a8ab55f12a4dd0fca038c0c1b82b03fe3}} 
+\index{parse.h@{parse.h}!IsSeparator@{IsSeparator}}
+\index{IsSeparator@{IsSeparator}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{IsSeparator()}{IsSeparator()}}
+{\footnotesize\ttfamily bool Is\+Separator (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Function that determines wheter a character is a separator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em c} & The checked character.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if the character is a dot or comma. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_a1325b94713161927277eb2e502e021f2}\label{parse_8h_a1325b94713161927277eb2e502e021f2}} 
+\index{parse.h@{parse.h}!IsSign@{IsSign}}
+\index{IsSign@{IsSign}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{IsSign()}{IsSign()}}
+{\footnotesize\ttfamily bool Is\+Sign (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Function that determines wheter the character is \textquotesingle{}+\textquotesingle{} or \textquotesingle{}-\/\textquotesingle{}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em c} & The checked character.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if the character is \textquotesingle{}+\textquotesingle{} or \textquotesingle{}-\/\textquotesingle{}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_ab02e2574e4b538dba9334c0263b57464}\label{parse_8h_ab02e2574e4b538dba9334c0263b57464}} 
+\index{parse.h@{parse.h}!ParamWarning@{ParamWarning}}
+\index{ParamWarning@{ParamWarning}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ParamWarning()}{ParamWarning()}}
+{\footnotesize\ttfamily void Param\+Warning (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{config_8h_a3a023c0c27667e78ae521eb64f1c7c81}{Param\+Type}}}]{param\+Type,  }\item[{double}]{old\+Number,  }\item[{double}]{new\+Number }\end{DoxyParamCaption})}
+
+
+
+Function displays a warning about the double use of parameters. 
+
+The function displays a warning that two parameters have been entered. For example, in input {\ttfamily 2x+10x-\/1=0} function will output that the value {\ttfamily 2x} will be ignored.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em param\+Type} & Parameter type (x$^\wedge$2, x or free member). \\
+\hline
+\mbox{\texttt{ in}}  & {\em old\+Number} & The old value of the parameter. \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+Number} & The new value of the parameter. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{parse_8h_ace0513aa3fec5a8e9a7c31538c692a7d}\label{parse_8h_ace0513aa3fec5a8e9a7c31538c692a7d}} 
+\index{parse.h@{parse.h}!ParseEnding@{ParseEnding}}
+\index{ParseEnding@{ParseEnding}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ParseEnding()}{ParseEnding()}}
+{\footnotesize\ttfamily bool Parse\+Ending (\begin{DoxyParamCaption}\item[{const char $\ast$$\ast$}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Function for processing the end of a line. 
+
+The function processes characters after the \textquotesingle{}=\textquotesingle{} sign. Issues a warning if the input does not end with \char`\"{}=0\char`\"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em buffer} & Input string. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{parse_8h_a4eb0d39419b7263430baa1bcf6531095}\label{parse_8h_a4eb0d39419b7263430baa1bcf6531095}} 
+\index{parse.h@{parse.h}!ParseNextNumber@{ParseNextNumber}}
+\index{ParseNextNumber@{ParseNextNumber}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ParseNextNumber()}{ParseNextNumber()}}
+{\footnotesize\ttfamily bool Parse\+Next\+Number (\begin{DoxyParamCaption}\item[{const char $\ast$$\ast$}]{buffer,  }\item[{double $\ast$}]{number }\end{DoxyParamCaption})}
+
+
+
+The function searches a next number in the string. 
+
+The function searches in the string the first number from the left and sets the buffer pointer to the next symbol in the string.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em number} & Pointer to a number in the string. \\
+\hline
+\mbox{\texttt{ in}}  & {\em buffer} & Input string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false in case of an error, true in case of correct exit. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_a1d0828556ec1ef02224b749da6dba690}\label{parse_8h_a1d0828556ec1ef02224b749da6dba690}} 
+\index{parse.h@{parse.h}!ParseNextParam@{ParseNextParam}}
+\index{ParseNextParam@{ParseNextParam}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ParseNextParam()}{ParseNextParam()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{config_8h_a3a023c0c27667e78ae521eb64f1c7c81}{Param\+Type}}$\ast$ Parse\+Next\+Param (\begin{DoxyParamCaption}\item[{const char $\ast$$\ast$}]{buffer,  }\item[{char $\ast$}]{param\+Name }\end{DoxyParamCaption})}
+
+
+
+The function searches a next parameter in the string. 
+
+The function searches in the line the first parameter from the left and sets the buffer pointer to the next symbol in the line.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em param\+Name} & Parameter symbol (a, b, x, ...), met before in the line. \textquotesingle{}\textbackslash{}0\textquotesingle{} if the function is called for the first time. \\
+\hline
+\mbox{\texttt{ in}}  & {\em buffer} & Input string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the parameter type (x$^\wedge$2, x or free member), {\ttfamily nullptr} in case of an error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parse_8h_a28390832b542bc52a7e5d8bedeb1fbd8}\label{parse_8h_a28390832b542bc52a7e5d8bedeb1fbd8}} 
+\index{parse.h@{parse.h}!ParseString@{ParseString}}
+\index{ParseString@{ParseString}!parse.h@{parse.h}}
+\doxysubsubsection{\texorpdfstring{ParseString()}{ParseString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_coefficients}{Coefficients}}$\ast$ Parse\+String (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{struct_coefficients}{Coefficients}} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+String parsing function. 
+
+The function anlyzes the string and calculates the coefficients. The equation should be written as ax$^\wedge$2+bx+c=0.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em params} & Pointer to the structure of the coefficients of a quadratic equation. \\
+\hline
+\mbox{\texttt{ in}}  & {\em buffer} & Input string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the structer. {\ttfamily nullptr} in case of an error. 
+\end{DoxyReturn}

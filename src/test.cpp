@@ -1,4 +1,8 @@
-﻿#include <Windows.h>
+﻿#include "..\inc\config.h"
+
+#ifdef UNIT_TESTS
+
+#include <Windows.h>
 #include <stdio.h>
 
 #include "..\inc\solve.h"
@@ -7,80 +11,38 @@
 
 void TestSolveTask()
 {
-    Coefficients arr[] = 
+    for (size_t st = 0; st < TestsCount; st++)
     {
-        {0.0, 0.0, 0.0},
-        {0.0, 0.0, 1.0},
+        Solution roots = SolveTask(SolveTaskInput + st);
 
-        {0.0, 1.0, 0.0},
-        {0.0, 1.0, 1.0},
-
-        {1.0, 0.0, 0.0},
-        {1.0, 0.0, 1.0},
-
-        {1.0, 1.0, 0.0},
-        {1.0, 1.0, -2.0},
-    };
-    
-
-    const size_t testsCount = sizeof(arr) / sizeof(Coefficients);
-    Coefficients answer[testsCount] =
-    {
-        {0.0,  0.0, INF_SOLUTIONS},
-        {0.0,  0.0, NO_SOLUTIONS},
-
-        {0.0,  0.0, ONE_SOLUTION},
-        {-1.0, 0.0, ONE_SOLUTION},
-
-        {0.0,  0.0, ONE_SOLUTION},
-        {0.0,  0.0, NO_SOLUTIONS},
-
-        {0.0, -1.0, TWO_SOLUTIONS},
-        {1.0, -2.0, TWO_SOLUTIONS},
-    };
-
-    for (size_t st = 0; st < testsCount; st++)
-    {
-        Coefficients roots = SolveTask(arr+st);
-
-        if (CompareRoots(roots, answer[st]) == false)
+        if (CompareRoots(roots, SolveTaskAnswers[st]) == false)
         {
-            SetRedColor();
+            SetColor(RED, BLACK);
             printf("\nТест №%d провален.\n"
-                "Правильный ответ a = %lg, b = %lg, c = %lg.\n"
-                "Программа выдала a = %lg, b = %lg, c = %lg.\n",
+                "Правильный ответ x1 = %lg, x2 = %lg, type = %d.\n"
+                "Программа выдала x1 = %lg, x2 = %lg, type = %d.\n",
                 st + 1, 
-                answer[st].a, answer[st].b, answer[st].c,
-                arr[st].a,    arr[st].b,    arr[st].c);
+                SolveTaskAnswers[st].x1, SolveTaskAnswers[st].x2, SolveTaskAnswers[st].type,
+                roots.x1,                roots.x2,                roots.type);
         }
         else
         {
-            SetGreenColor();
+            SetColor(GREEN, BLACK);
             printf("Тест №%d пройден.\n", st + 1);
         }
     }
-    ResetColor();
+    SetColor(WHITE, BLACK);
 }
 
-bool CompareRoots(Coefficients r1, Coefficients r2)
+bool CompareRoots(Solution r1, Solution r2)
 {
-    return (r1.c == r2.c && (r1.a == r2.a && r1.b == r2.b || r1.a == r2.b && r1.b == r2.a));
+    return (r1.type == r2.type && (r1.x1 == r2.x1 && r1.x2 == r2.x2 || r1.x1 == r2.x2 && r1.x2 == r2.x1));
 }
 
-void SetGreenColor()
-{
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hStdOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-}
-
-void SetRedColor()
+void SetColor(int text, int background)
 {
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hStdOut, FOREGROUND_RED | FOREGROUND_INTENSITY);
+    SetConsoleTextAttribute(hStdOut, ((background & 0xf)<<4) | (text & 0xf) );
 }
 
-void ResetColor()
-{
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hStdOut, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-}
+#endif

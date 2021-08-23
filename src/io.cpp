@@ -37,14 +37,18 @@ char* GetString(char* buffer, int length, FILE* stream)
 }
 
 
-void PrintSolution(Coefficients* params)
+void PrintSolution(Solution* solution)
 {
-    if (params->a == NAN && params->b == NAN && params->c == NAN)
+    assert(solution);
+
+    SolutionType type = solution->type;
+
+    if (type == NO_SOLUTIONS)
         printf(NO_SLN);
-    else if (params->c == 1.0)
-        printf(ONE_SLN(params->a));
-    else if (params->c == 2.0)
-        printf(TWO_SLN(params->a, params->b));
-    else
+    else if (type == ONE_SOLUTION)
+        printf(ONE_SLN(solution->x1));
+    else if (type == TWO_SOLUTIONS)
+        printf(TWO_SLN(solution->x1, solution->x2));
+    else if (type == INF_SOLUTIONS)
         printf(INF_SLN);
 }

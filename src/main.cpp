@@ -1,6 +1,6 @@
 ﻿#include <Windows.h>
 
-#include "..\inc\main.h"
+#include "..\inc\config.h"
 #include "..\inc\equation_client.h"
 
 #ifdef UNIT_TESTS

@@ -5,59 +5,73 @@
 #include "..\inc\solve.h"
 #include "..\inc\parse.h"
 
-Coefficients SolveTask(const Coefficients* params)
+Solution SolveTask(const Coefficients* params)
 {
     assert(params);
 
-    Coefficients result = { 0,0,0 };
+    Solution result = { 0, 0, NO_SOLUTIONS};
 
-    if (CompareNumbers(params->a, 0.0) == false)
+    double a = params->a;
+    double b = params->b;
+    double c = params->c;
+
+    if (CompareNumbers(a, 0.0) == false)
     {
-        double D = (params->b * params->b) - (4 * params->a * params->c);
+        double disc = CalculateDiscriminant(a, b, c);
 
-        if (D < 0)
+        if (CompareNumbers(disc, 0.0))
         {
-            result.c = NO_SOLUTIONS;
+            result.x1 = (-b) / (2 * a);
+
+            if (IsZero(result.x1))
+                result.x1 = 0.0;
+
+            result.type = ONE_SOLUTION;
         }
-        else if (CompareNumbers(D, 0.0))
+        else if (disc < 0)
         {
-            result.a = (-params->b) / (2 * params->a);
-
-            if (result.a == -0.0)
-                result.a = 0.0;
-
-            result.c = ONE_SOLUTION;
+            result.x1 = NO_SOLUTIONS;
         }
         else
         {
-            D  = sqrt(D);
-            result.a = (-params->b + D) / (2 * params->a);
-            result.b = (-params->b - D) / (2 * params->a);
+            disc      = sqrt(disc);
+            result.x1 = (-b + disc) / (2 * a);
+            result.x2 = (-b - disc) / (2 * a);
 
-            if (result.a == -0.0)
-                result.a = 0.0;
-            if (result.b == -0.0)
-                result.b = 0.0;
+            if (IsZero(result.x1))
+                result.x1 = 0.0;
+            if (IsZero(result.x2))
+                result.x2 = 0.0;
 
-            result.c = TWO_SOLUTIONS;
+            result.type = TWO_SOLUTIONS;
         }
     }
-    else if (CompareNumbers(params->b, 0.0) == false)
+    else if (CompareNumbers(b, 0.0) == false)
     {
-        result.a = (-params->c) / params->b;
+        result.x1 = (-c) / b;
 
-        if (result.a == -0.0)
-            result.a = 0.0;
+        if (result.x1 == -0.0)
+            result.x1 = 0.0;
 
-        result.c = ONE_SOLUTION;
+        result.type = ONE_SOLUTION;
     }
     else
     {
-        if (CompareNumbers(params->c, 0.0) == true)
-            result.c = INF_SOLUTIONS;
+        if (CompareNumbers(c, 0.0) == true)
+            result.type = INF_SOLUTIONS;
         else
-            result.c = NO_SOLUTIONS;
+            result.type = NO_SOLUTIONS;
     }
 
     return result;
+}
+
+double CalculateDiscriminant(double a, double b, double c)
+{
+    return (b * b) - (4 * a * c);
+}
+
+double IsZero(double number)
+{
+    return (fabs(number) < MinCompareValue);
 }
