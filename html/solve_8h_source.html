@@ -70,30 +70,30 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="solve_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef SOLVE_H_</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define SOLVE_H_</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="config_8h.html">config.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define NO_SLN              &quot;Корней нет.\n&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define ONE_SLN(ans)        &quot;Уравнение имеет один корень: x = %lg\n\n&quot;</span>, ans</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define TWO_SLN(ans1, ans2) &quot;Уравнение имеет два кореня: x1 = %lg, x2 = %lg\n\n&quot;</span>, ans1, ans2</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define INF_SLN             &quot;Уравнение имеет бесконечно много корней.\n&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="struct_solution.html">Solution</a> <a class="code" href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">SolveTask</a>(<span class="keyword">const</span> <a class="code" href="struct_coefficients.html">Coefficients</a>* params);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">double</span> <a class="code" href="solve_8h.html#ae7a350314961efac3c1d1b6616af293b">CalculateDiscriminant</a>(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b, <span class="keywordtype">double</span> c);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">double</span> <a class="code" href="solve_8h.html#ab79f1339b08bfbbd3e195b8d5f4d45e0">IsZero</a>(<span class="keywordtype">double</span> number);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !SOLVE_H_</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef SOLVE_H_</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define SOLVE_H_</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="config_8h.html">config.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define NO_SLN              &quot;No solutions.\n\n&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define ONE_SLN(ans)        &quot;Equation has one solution: x = %lg\n\n&quot;</span>, ans</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define TWO_SLN(ans1, ans2) &quot;Equation has two solutions: x1 = %lg, x2 = %lg\n\n&quot;</span>, ans1, ans2</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define INF_SLN             &quot;Equation has an infinit number of solutions.\n\n&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="struct_solution.html">Solution</a> <a class="code" href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">SolveTask</a>(<span class="keyword">const</span> <a class="code" href="struct_coefficients.html">Coefficients</a>* params);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">double</span> <a class="code" href="solve_8h.html#a425668a79086c0ffc751194f833c9ca6">CalculateDiscriminant</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> a, <span class="keyword">const</span> <span class="keywordtype">double</span> b, <span class="keyword">const</span> <span class="keywordtype">double</span> c);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">double</span> <a class="code" href="solve_8h.html#a3c461de00566b259ebd336219a6fa153">IsZero</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> number);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !SOLVE_H_</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div><div class="ttdoc">Configuration file.</div></div>
-<div class="ttc" id="asolve_8h_html_a77076910542bdfe82e69b13d887ad90b"><div class="ttname"><a href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">SolveTask</a></div><div class="ttdeci">Solution SolveTask(const Coefficients *params)</div><div class="ttdoc">Function solves the quadratic equation.</div><div class="ttdef"><b>Definition:</b> solve.cpp:8</div></div>
-<div class="ttc" id="asolve_8h_html_ab79f1339b08bfbbd3e195b8d5f4d45e0"><div class="ttname"><a href="solve_8h.html#ab79f1339b08bfbbd3e195b8d5f4d45e0">IsZero</a></div><div class="ttdeci">double IsZero(double number)</div><div class="ttdoc">Function determines wheter the number is zero.</div><div class="ttdef"><b>Definition:</b> solve.cpp:74</div></div>
-<div class="ttc" id="asolve_8h_html_ae7a350314961efac3c1d1b6616af293b"><div class="ttname"><a href="solve_8h.html#ae7a350314961efac3c1d1b6616af293b">CalculateDiscriminant</a></div><div class="ttdeci">double CalculateDiscriminant(double a, double b, double c)</div><div class="ttdef"><b>Definition:</b> solve.cpp:69</div></div>
-<div class="ttc" id="astruct_coefficients_html"><div class="ttname"><a href="struct_coefficients.html">Coefficients</a></div><div class="ttdoc">Coefficients of the quadratic equation ax^2+bx+c.</div><div class="ttdef"><b>Definition:</b> config.h:58</div></div>
-<div class="ttc" id="astruct_solution_html"><div class="ttname"><a href="struct_solution.html">Solution</a></div><div class="ttdoc">Solution structure.</div><div class="ttdef"><b>Definition:</b> config.h:91</div></div>
+<div class="ttc" id="asolve_8h_html_a3c461de00566b259ebd336219a6fa153"><div class="ttname"><a href="solve_8h.html#a3c461de00566b259ebd336219a6fa153">IsZero</a></div><div class="ttdeci">double IsZero(const double number)</div><div class="ttdoc">Function determines wheter the number is zero.</div><div class="ttdef"><b>Definition:</b> solve.cpp:75</div></div>
+<div class="ttc" id="asolve_8h_html_a425668a79086c0ffc751194f833c9ca6"><div class="ttname"><a href="solve_8h.html#a425668a79086c0ffc751194f833c9ca6">CalculateDiscriminant</a></div><div class="ttdeci">double CalculateDiscriminant(const double a, const double b, const double c)</div><div class="ttdoc">Function calculates discriminant of the quadratic equation.</div><div class="ttdef"><b>Definition:</b> solve.cpp:70</div></div>
+<div class="ttc" id="asolve_8h_html_a77076910542bdfe82e69b13d887ad90b"><div class="ttname"><a href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">SolveTask</a></div><div class="ttdeci">Solution SolveTask(const Coefficients *params)</div><div class="ttdoc">Function solves the quadratic equation.</div><div class="ttdef"><b>Definition:</b> solve.cpp:9</div></div>
+<div class="ttc" id="astruct_coefficients_html"><div class="ttname"><a href="struct_coefficients.html">Coefficients</a></div><div class="ttdoc">Coefficients of the quadratic equation ax^2+bx+c.</div><div class="ttdef"><b>Definition:</b> config.h:48</div></div>
+<div class="ttc" id="astruct_solution_html"><div class="ttname"><a href="struct_solution.html">Solution</a></div><div class="ttdoc">Solution structure.</div><div class="ttdef"><b>Definition:</b> config.h:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

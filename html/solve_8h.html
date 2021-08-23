@@ -82,16 +82,16 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a3dca189f8548cb576b62c947c50e9b08"><td class="memItemLeft" align="right" valign="top"><a id="a3dca189f8548cb576b62c947c50e9b08"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_SLN</b>&#160;&#160;&#160;&quot;Корней нет.\n&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_SLN</b>&#160;&#160;&#160;&quot;No solutions.\n\n&quot;</td></tr>
 <tr class="separator:a3dca189f8548cb576b62c947c50e9b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24f9a3d73361a52f23710c1ab35d5946"><td class="memItemLeft" align="right" valign="top"><a id="a24f9a3d73361a52f23710c1ab35d5946"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ONE_SLN</b>(ans)&#160;&#160;&#160;&quot;Уравнение имеет один корень: x = %lg\n\n&quot;, ans</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ONE_SLN</b>(ans)&#160;&#160;&#160;&quot;Equation has one solution: x = %lg\n\n&quot;, ans</td></tr>
 <tr class="separator:a24f9a3d73361a52f23710c1ab35d5946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8008b246242972b7475414af5f2470"><td class="memItemLeft" align="right" valign="top"><a id="aed8008b246242972b7475414af5f2470"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TWO_SLN</b>(ans1,  ans2)&#160;&#160;&#160;&quot;Уравнение имеет два кореня: x1 = %lg, x2 = %lg\n\n&quot;, ans1, ans2</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TWO_SLN</b>(ans1,  ans2)&#160;&#160;&#160;&quot;Equation has two solutions: x1 = %lg, x2 = %lg\n\n&quot;, ans1, ans2</td></tr>
 <tr class="separator:aed8008b246242972b7475414af5f2470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a783c95c7805157912a6db973345bde26"><td class="memItemLeft" align="right" valign="top"><a id="a783c95c7805157912a6db973345bde26"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>INF_SLN</b>&#160;&#160;&#160;&quot;Уравнение имеет бесконечно много корней.\n&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INF_SLN</b>&#160;&#160;&#160;&quot;Equation has an infinit number of solutions.\n\n&quot;</td></tr>
 <tr class="separator:a783c95c7805157912a6db973345bde26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -99,17 +99,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a77076910542bdfe82e69b13d887ad90b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solution.html">Solution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">SolveTask</a> (const <a class="el" href="struct_coefficients.html">Coefficients</a> *params)</td></tr>
 <tr class="memdesc:a77076910542bdfe82e69b13d887ad90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function solves the quadratic equation.  <a href="solve_8h.html#a77076910542bdfe82e69b13d887ad90b">More...</a><br /></td></tr>
 <tr class="separator:a77076910542bdfe82e69b13d887ad90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7a350314961efac3c1d1b6616af293b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve_8h.html#ae7a350314961efac3c1d1b6616af293b">CalculateDiscriminant</a> (double a, double b, double c)</td></tr>
-<tr class="separator:ae7a350314961efac3c1d1b6616af293b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab79f1339b08bfbbd3e195b8d5f4d45e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve_8h.html#ab79f1339b08bfbbd3e195b8d5f4d45e0">IsZero</a> (double number)</td></tr>
-<tr class="memdesc:ab79f1339b08bfbbd3e195b8d5f4d45e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determines wheter the number is zero.  <a href="solve_8h.html#ab79f1339b08bfbbd3e195b8d5f4d45e0">More...</a><br /></td></tr>
-<tr class="separator:ab79f1339b08bfbbd3e195b8d5f4d45e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a425668a79086c0ffc751194f833c9ca6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve_8h.html#a425668a79086c0ffc751194f833c9ca6">CalculateDiscriminant</a> (const double a, const double b, const double c)</td></tr>
+<tr class="memdesc:a425668a79086c0ffc751194f833c9ca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calculates discriminant of the quadratic equation.  <a href="solve_8h.html#a425668a79086c0ffc751194f833c9ca6">More...</a><br /></td></tr>
+<tr class="separator:a425668a79086c0ffc751194f833c9ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c461de00566b259ebd336219a6fa153"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve_8h.html#a3c461de00566b259ebd336219a6fa153">IsZero</a> (const double number)</td></tr>
+<tr class="memdesc:a3c461de00566b259ebd336219a6fa153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determines wheter the number is zero.  <a href="solve_8h.html#a3c461de00566b259ebd336219a6fa153">More...</a><br /></td></tr>
+<tr class="separator:a3c461de00566b259ebd336219a6fa153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver functions file. </p>
+<dl class="section author"><dt>Author</dt><dd>Maslov Artem </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0.0.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20 August 2021 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae7a350314961efac3c1d1b6616af293b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7a350314961efac3c1d1b6616af293b">&#9670;&nbsp;</a></span>CalculateDiscriminant()</h2>
+<a id="a425668a79086c0ffc751194f833c9ca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a425668a79086c0ffc751194f833c9ca6">&#9670;&nbsp;</a></span>CalculateDiscriminant()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,19 +121,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">double CalculateDiscriminant </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>c</em>&#160;</td>
         </tr>
         <tr>
@@ -139,12 +143,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>/brief Function calculates discriminant of the quadratic equation. /param a,b,c <a class="el" href="struct_coefficients.html" title="Coefficients of the quadratic equation ax^2+bx+c.">Coefficients</a> of the quadratic equation. /return Discriminant of the quadratic equation. </p>
+
+<p>Function calculates discriminant of the quadratic equation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,b,c</td><td><a class="el" href="struct_coefficients.html" title="Coefficients of the quadratic equation ax^2+bx+c.">Coefficients</a> of the quadratic equation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Discriminant of the quadratic equation. </dd></dl>
 
 </div>
 </div>
-<a id="ab79f1339b08bfbbd3e195b8d5f4d45e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab79f1339b08bfbbd3e195b8d5f4d45e0">&#9670;&nbsp;</a></span>IsZero()</h2>
+<a id="a3c461de00566b259ebd336219a6fa153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c461de00566b259ebd336219a6fa153">&#9670;&nbsp;</a></span>IsZero()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +164,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">double IsZero </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>number</em></td><td>)</td>
           <td></td>
         </tr>
@@ -160,6 +172,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function determines wheter the number is zero. </p>
+<p>\params[in] number The number being checked</p>
 <dl class="section return"><dt>Returns</dt><dd>true if number is zero. </dd></dl>
 
 </div>
@@ -184,7 +197,7 @@ Functions</h2></td></tr>
 <p>The function gets coefficients of a quadratic equation and finds it's roots. There are no solutions: <a class="el" href="struct_coefficients.html#a3a8a6e5cc52fbaa075ef61983d441eed" title="Coefficient without x.">Coefficients.c</a> == NO_SOLUTIONS. There is one solution: <a class="el" href="struct_coefficients.html#a65e5bf727bb68e304b280a0d74db7622" title="Coefficient at x^2.">Coefficients.a</a> equal to the root of the quation, <a class="el" href="struct_coefficients.html#a3a8a6e5cc52fbaa075ef61983d441eed" title="Coefficient without x.">Coefficients.c</a> == ONE_SOLUTION. There are two solutions: <a class="el" href="struct_coefficients.html#a65e5bf727bb68e304b280a0d74db7622" title="Coefficient at x^2.">Coefficients.a</a>, <a class="el" href="struct_coefficients.html#ac8453ba82f253f66045a84645d001c37" title="Coefficient at x.">Coefficients.b</a> - the roots of the equation, <a class="el" href="struct_coefficients.html#a3a8a6e5cc52fbaa075ef61983d441eed" title="Coefficient without x.">Coefficients.c</a> == TWO_SOLUTIONS. There are infinit number of solution: <a class="el" href="struct_coefficients.html#a3a8a6e5cc52fbaa075ef61983d441eed" title="Coefficient without x.">Coefficients.c</a> == INF_SOLUTIONS</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">params</td><td><a class="el" href="struct_coefficients.html" title="Coefficients of the quadratic equation ax^2+bx+c.">Coefficients</a> of the quadratic equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">params</td><td><a class="el" href="struct_coefficients.html" title="Coefficients of the quadratic equation ax^2+bx+c.">Coefficients</a> of the quadratic equation.</td></tr>
   </table>
   </dd>
 </dl>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['solutiontype_103',['SolutionType',['../config_8h.html#a24786ec97b9c06c9dcd291a7002c71dc',1,'config.h']]]
+  ['paramtype_84',['ParamType',['../config_8h.html#a3a023c0c27667e78ae521eb64f1c7c81',1,'config.h']]]
 ];

@@ -1,6 +1,9 @@
 /**
 * \file
 * \brief Parser functions file
+* \author Maslov Artem
+* \version 1.0.0.0
+* \date 20 August 2021
 */
 #ifndef PARSE_H_
 #define PARSE_H_
@@ -12,8 +15,10 @@
 *
 * The function anlyzes the string and calculates the coefficients. The equation should be written as ax^2+bx+c=0.
 * 
-* \param[in,out] params Pointer to the structure of the coefficients of a quadratic equation.
-* \param[in]     buffer Input string.
+* \warning Function will notify user if input was incorrect.
+* 
+* \param[in]  buffer Input string.
+* \param[out] params Pointer to the structure of the coefficients of a quadratic equation.
 * 
 * \return Pointer to the structer. `nullptr` in case of an error.
 */
@@ -25,8 +30,8 @@ Coefficients* ParseString(const char* buffer, Coefficients* params);
 * The function searches in the string the first number from the left and 
 * sets the buffer pointer to the next symbol in the string.
 * 
-* \param[out] number Pointer to a number in the string.
 * \param[in]  buffer Input string.
+* \param[out] number Pointer to a number in the string.
 * 
 * \return false in case of an error, true in case of correct exit.
 */
@@ -51,6 +56,8 @@ ParamType* ParseNextParam(const char** buffer, char* paramName);
 * The function processes characters after the '=' sign. Issues a warning if the input does not end with "=0".
 * 
 * \param[in] buffer Input string.
+* 
+* \return false in case of an error, true in case of correct exit.
 */
 bool ParseEnding(const char** buffer);
 
@@ -76,7 +83,7 @@ double ConvertToDouble(const char* start, const char* end);
 * \param[in] oldNumber The old value of the parameter.
 * \param[in] newNumber The new value of the parameter.
 */
-void ParamWarning(ParamType paramType, double oldNumber, double newNumber);
+void ParamWarning(const ParamType paramType, const double oldNumber, const double newNumber);
 
 /**
 * \brief Function that determines wheter a character is a separator.
@@ -85,7 +92,7 @@ void ParamWarning(ParamType paramType, double oldNumber, double newNumber);
 * 
 * \return true, if the character is a dot or comma.
 */
-bool IsSeparator(char c);
+bool IsSeparator(const char c);
 
 /**
 * \brief Function that compare numbers
@@ -96,7 +103,7 @@ bool IsSeparator(char c);
 * 
 * \return true, is numbers are equal.
 */
-bool CompareNumbers(double a, double b);
+bool CompareNumbers(const double a, const double b);
 
 /**
 * \brief Function that determines wheter the character is '+' or '-'.
@@ -105,6 +112,6 @@ bool CompareNumbers(double a, double b);
 * 
 * \return true, if the character is '+' or '-'.
 */
-bool IsSign(char c);
+bool IsSign(const char c);
 
 #endif // !PARSE_H_

@@ -1,6 +1,9 @@
 /**
 * \file
 * \brief Configuration file
+* \author Maslov Artem
+* \version 1.0.0.0
+* \date 20 August 2021
 */
 #ifndef CONFIG_H_
 #define CONFIG_H_
@@ -19,39 +22,26 @@ const int MaxLength = 1000;
 */
 const double MinCompareValue = 1e-6;
 
-/// Black color for console
-#define BLACK       0
-/// DARK_BLUE color for console
-#define DARK_BLUE   1
-/// DARK_GREEN color for console
-#define DARK_GREEN  2
-/// DARK_CYAN color for console
-#define DARK_CYAN   3
-/// DARK_RED color for console
-#define DARK_RED    4
-/// DARK_VIOLET color for console
-#define DARK_VIOLET 5
-/// DARK_YELLOW color for console
-#define DARK_YELLOW 6
-/// DARK_WHITE color for console
-#define DARK_WHITE  7
-/// GREY color for console
-#define GREY        8
-/// BLUE color for console
-#define BLUE        9
-/// GREEN color for console
-#define GREEN       10
-/// CYAN color for console
-#define CYAN        11
-/// RED color for console
-#define RED         12
-/// VIOLET color for console
-#define VIOLET      13
-/// YELLOW color for console
-#define YELLOW      14
-/// WHITE color for console
-#define WHITE       15
-
+/// Text and background colors for console
+enum ConsoleColors
+{
+    BLACK       = 0,
+    DARK_BLUE   = 1,
+    DARK_GREEN  = 2,
+    DARK_CYAN   = 3,
+    DARK_RED    = 4,
+    DARK_VIOLET = 5,
+    DARK_YELLOW = 6,
+    DARK_WHITE  = 7,
+    GREY        = 8,
+    BLUE        = 9,
+    GREEN       = 10,
+    CYAN        = 11,
+    RED         = 12,
+    VIOLET      = 13,
+    YELLOW      = 14,
+    WHITE       = 15
+};
 
 /// \brief Coefficients of the quadratic equation ax^2+bx+c.
 struct Coefficients

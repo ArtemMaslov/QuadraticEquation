@@ -1,11 +1,16 @@
 ﻿/**
 * \file
 * \brief Test functions file
+* \author Maslov Artem
+* \version 1.0.0.0
+* \date 20 August 2021
 */
 #ifndef TEST_H_
 #define TEST_H_
 
 #include "config.h"
+
+#ifdef UNIT_TESTS
 
 const int TestMaxLength = 100;
 
@@ -48,20 +53,13 @@ void TestSolveTask();
 /**
 * \brief Function determines wheter roots are equal.
 *
-* \param[in] r1, r2 Roots of the equation.
+* \param[in] r1,r2 Roots of the equation.
+* 
 * \return true, if roots are equal.
 */
-bool CompareRoots(Solution r1, Solution r2);
+bool CompareRoots(const Solution r1, const Solution r2);
 
-/**
-* \brief Set color for text and background in console
-*
-* Full list of colors avaliable in config.h
-* 
-* \param[in] text Text color
-* \param[in] background Background color
-*/
-void SetColor(int text, int background);
+#endif // UNIT_TESTS
 
 #endif // !TEST_H_
 

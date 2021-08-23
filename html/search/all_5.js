@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['getstring_24',['GetString',['../io_8h.html#a000cb6793b9803b070211e8a61f8d760',1,'io.cpp']]],
-  ['green_25',['GREEN',['../config_8h.html#acfbc006ea433ad708fdee3e82996e721',1,'config.h']]],
-  ['grey_26',['GREY',['../config_8h.html#adce122f566c88a1eceeb79a635afa964',1,'config.h']]]
+  ['inf_5fsolutions_15',['INF_SOLUTIONS',['../config_8h.html#a24786ec97b9c06c9dcd291a7002c71dcac4b24b361f6a2739283472501620cedb',1,'config.h']]],
+  ['io_2eh_16',['io.h',['../io_8h.html',1,'']]],
+  ['isseparator_17',['IsSeparator',['../parse_8h.html#a96c683e1babf01eb4f1d0138dc097acd',1,'parse.cpp']]],
+  ['issign_18',['IsSign',['../parse_8h.html#a80700aefa47a4342f984f57b43775d00',1,'parse.cpp']]],
+  ['iszero_19',['IsZero',['../solve_8h.html#a3c461de00566b259ebd336219a6fa153',1,'solve.cpp']]]
 ];

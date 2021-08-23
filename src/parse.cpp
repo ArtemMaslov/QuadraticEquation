@@ -5,6 +5,7 @@
 #include <assert.h>
 
 #include "..\inc\parse.h"
+#include "..\inc\io.h"
 //***\\---//***\\-----//***\\---//***\\
 
 Coefficients* ParseString(const char* buffer, Coefficients* params)
@@ -20,7 +21,7 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
 
     while (*buffer)
     {
-        if (isspace(*buffer))//Пропускаем пробельные символы
+        if (isspace(*buffer))//Skip space symbols
         {
             buffer++;
             continue;
@@ -67,7 +68,9 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
 
         number = 0;
     }
-    puts("Ошибка ввода. В введённой строке не было знака '='\n");
+    SetColor(RED, BLACK);
+    puts("Input error. There is no '=' in the input string.\n");
+    SetColor(WHITE, BLACK);
     return nullptr;
 }
 
@@ -79,14 +82,12 @@ bool ParseEnding(const char** buffer)
     assert(*buffer);
 
     bool warning    = false;
-    bool zeroInText = false;
 
     while (**buffer)
     {
-        if (isspace(**buffer))//Пропускаем пробельные символы
+        if (isspace(**buffer))//Skip space symbols
         {
             buffer++;
-            assert(*buffer);
             continue;
         }
 
@@ -94,22 +95,23 @@ bool ParseEnding(const char** buffer)
         {
             if (!warning)
             {
-                puts("Квадратное уравнение должно быть записано в приведенном виде только в левой части от знака '='. Справа от '=' должен стоять 0. Следующие сиволы были проигнорированы:");
+                SetColor(RED, BLACK);
+                puts("Equation must be entered in the form 'ax^2 + bx + c = 0'."
+                    "This symbols were ignored:");
+                SetColor(YELLOW, BLACK);
                 warning = true;
             }
             putchar(**buffer);
         }
-        else
-            zeroInText = true;
 
         (*buffer)++;
-        assert(*buffer);
     }
 
     if (warning)
+    {
         putchar('\n');
-    else if (!zeroInText)
-        puts("Справа от '=' должен стоять 0.");
+        SetColor(WHITE, BLACK);
+    }
 
     return true;
 }
@@ -126,10 +128,9 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
 
     while (**buffer)
     {
-        if (isspace(**buffer))//Пропускаем пробельные символы
+        if (isspace(**buffer))//Skip space symbols
         {
             (*buffer)++;
-            assert(*buffer);
             continue;
         }
 
@@ -139,7 +140,9 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
                 *paramName = **buffer;
             if (*paramName != **buffer)
             {
-                printf("Вводите только один параметр, состоящий из одного символа латинского алфавита. Введены параметры '%c', '%c'.\n\n", *paramName, **buffer);
+                SetColor(RED, BLACK);
+                printf("Enter only single-symbol parameter. Entered parameter '%c' is wrong, use '%c' instead.\n\n", **buffer, * paramName);
+                SetColor(WHITE, BLACK);
                 return nullptr;
             }
             paramType = X_1;
@@ -147,17 +150,19 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
         else if (**buffer == '^')
         {
             (*buffer)++;
-            double power = 0;
-            int ipower   = 0;
+            double power  = 0;
+            int    ipower = 0;
 
             if (ParseNextNumber(buffer, &power) == false)
                 power  = 0;
             else
-                ipower = (int)power;//Обнуляем дробную часть
+                ipower = (int)power;//Remove fractional part
 
             if (CompareNumbers((double)ipower, power) == false)
             {
-                printf("Вводите только целые степени параметров. Степень %lg является ошибочной.\n\n", power);
+                SetColor(RED, BLACK);
+                printf("Enter only decimal numbers for parameter power. Power %lg is wrong.\n\n", power);
+                SetColor(WHITE, BLACK);
                 return nullptr;
             }
 
@@ -173,7 +178,9 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
                 paramType = X_2;
                 break;
             default:
-                printf("Программа умеет решать только квадратные уравнения. Степень %d является ошибочной.\n\n", ipower);
+                SetColor(RED, BLACK);
+                printf("Programm can solve only quadratic equations. Power %lg is wrong.\n\n", power);
+                SetColor(WHITE, BLACK);
                 return nullptr;
             }
             break;
@@ -184,12 +191,13 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
         }
         else
         {
-            printf("Ошибка ввода. Символ '%c' встречается не в том месте.\n\n", **buffer);
+            SetColor(RED, BLACK);
+            printf("Input error. Incorrect symbol '%c'.\n\n", **buffer);
+            SetColor(WHITE, BLACK);
             return nullptr;
         }
 
         (*buffer)++;
-        assert(*buffer);
     }
 
     return &paramType;
@@ -210,10 +218,9 @@ bool ParseNextNumber(const char** buffer, double* number)
 
     while (**buffer)
     {
-        if (isspace(**buffer))//Пропускаем пробельные символы
+        if (isspace(**buffer))//Skip space symbols
         {
             (*buffer)++;
-            assert(*buffer);
             continue;
         }
 
@@ -232,7 +239,9 @@ bool ParseNextNumber(const char** buffer, double* number)
             }
             else
             {
-                printf("Ошибка ввода. Некорректный символ '%c'.\n\n", **buffer);
+                SetColor(RED, BLACK);
+                printf("Input error. Incorrect symbol '%c'.\n\n", **buffer);
+                SetColor(WHITE, BLACK);
                 return false;
             }
         }
@@ -255,13 +264,14 @@ bool ParseNextNumber(const char** buffer, double* number)
             }
             else
             {
-                printf("Ошибка ввода. Некорректный символ '%c'.\n\n", **buffer);
+                SetColor(RED, BLACK);
+                printf("Input error. Incorrect symbol '%c'.\n\n", **buffer);
+                SetColor(WHITE, BLACK);
                 return false;
             }
         }
 
         (*buffer)++;
-        assert(*buffer);
     }
     return false;
 }
@@ -274,9 +284,9 @@ double ConvertToDouble(const char* start, const char* end)
     assert(end);
 
     double number = 0;
-    bool separator = false;
-    int digitsAfterSeparator = 0;
-    double k = 1; // coefficient, which equal 10 to power of digitsAfterSeparator.
+    double k      = 1; // coefficient, which equal 10 to power of digitsAfterSeparator.
+    bool   separator = false;
+    int    digitsAfterSeparator = 0;
 
     while (start <= end)
     {
@@ -291,9 +301,19 @@ double ConvertToDouble(const char* start, const char* end)
                     if(snumber)
                         snumber = (char*)memcpy(snumber, start, end - start + 1);
                     if(snumber)
-                        printf("Число %s введено с очень большой точностью, оно будет обрезано до %lg. Можно вводить только %d цифр после запятой.\n\n", snumber, number / k, digitsAfterSeparator);
+                    {
+                        SetColor(RED, BLACK);
+                        printf("The number %s entered with too high accuracy, it will be shorten to %lg. It's possible to enter only %d digits after separator.\n\n", 
+                            snumber, number / k, digitsAfterSeparator);
+                        SetColor(WHITE, BLACK);
+                    }
                     else
-                        printf("Введено число с очень большой точностью, оно будет обрезано до %lg. Можно вводить только %d цифр после запятой.\n\n", number / k, digitsAfterSeparator);
+                    {
+                        SetColor(RED, BLACK);
+                        printf("The number entered with too high accuracy, it will be shorten to %lg. It's possible to enter only %d digits after separator.\n\n",
+                            snumber, number / k, digitsAfterSeparator);
+                        SetColor(WHITE, BLACK);
+                    }
                     break;
                 }
 
@@ -314,35 +334,44 @@ double ConvertToDouble(const char* start, const char* end)
 
 //***\\---//***\\-----//***\\---//***\\
 
-void ParamWarning(ParamType paramType, double oldNumber, double newNumber)
+void ParamWarning(const ParamType paramType, const double oldNumber, const double newNumber)
 {
     switch (paramType)
     {
     case X_0:
-        printf("Вводите только один свободный член уравнения. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
+        SetColor(YELLOW, BLACK);
+        printf("Enter only one free member of equation. Old value of free member %lg replaced with new value %lg\n",
+            oldNumber, newNumber);
+        SetColor(WHITE, BLACK);
         break;
     case X_1:
-        printf("Вводите x только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
+        SetColor(YELLOW, BLACK);
+        printf("Enter only one 'x' member of equation. Old value of 'x' member %lg replaced with new value %lg\n",
+            oldNumber, newNumber);
+        SetColor(WHITE, BLACK);
         break;
     case X_2:
-        printf("Вводите x^2 только один раз. Старое значение %lg было заменено на новое %lg\n", oldNumber, newNumber);
+        SetColor(YELLOW, BLACK);
+        printf("Enter only one 'x^2' member of equation. Old value of 'x^2' member %lg replaced with new value %lg\n",
+            oldNumber, newNumber);
+        SetColor(WHITE, BLACK);
         break;
     }
 }
 
 //***\\---//***\\-----//***\\---//***\\
 
-bool IsSeparator(char c)
+bool IsSeparator(const char c)
 {
     return (c == '.' || c == ',');
 }
 
-bool CompareNumbers(double a, double b)
+bool CompareNumbers(const double a, const double b)
 {
     return (fabs(a - b) < MinCompareValue);
 }
 
-bool IsSign(char c)
+bool IsSign(const char c)
 {
-    return c == '-' || c == '+';// || c == '*' || c == '/'
+    return c == '-' || c == '+';
 }

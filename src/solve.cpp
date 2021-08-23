@@ -3,6 +3,7 @@
 #include <assert.h>
 
 #include "..\inc\solve.h"
+#include "..\inc\io.h"
 #include "..\inc\parse.h"
 
 Solution SolveTask(const Coefficients* params)
@@ -66,12 +67,12 @@ Solution SolveTask(const Coefficients* params)
     return result;
 }
 
-double CalculateDiscriminant(double a, double b, double c)
+double CalculateDiscriminant(const double a, const double b, const double c)
 {
     return (b * b) - (4 * a * c);
 }
 
-double IsZero(double number)
+double IsZero(const double number)
 {
     return (fabs(number) < MinCompareValue);
 }

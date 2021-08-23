@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['paramtype_102',['ParamType',['../config_8h.html#a3a023c0c27667e78ae521eb64f1c7c81',1,'config.h']]]
+  ['consolecolors_83',['ConsoleColors',['../config_8h.html#a225b8f79702c03082fd73b092bb44bf7',1,'config.h']]]
 ];

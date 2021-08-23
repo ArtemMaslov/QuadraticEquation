@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['maxlength_32',['MaxLength',['../config_8h.html#ae21f10c5d848ef582d010bbfe5094f1e',1,'config.h']]],
-  ['mincomparevalue_33',['MinCompareValue',['../config_8h.html#accd1b8e325672fa630b3a78781f12482',1,'config.h']]]
+  ['no_5fsolutions_22',['NO_SOLUTIONS',['../config_8h.html#a24786ec97b9c06c9dcd291a7002c71dca7ba2733ae0b3f049b4fcd4afedd9b980',1,'config.h']]]
 ];

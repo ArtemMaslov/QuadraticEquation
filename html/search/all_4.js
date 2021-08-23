@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['equation_5fclient_2eh_22',['equation_client.h',['../equation__client_8h.html',1,'']]],
-  ['equationclient_23',['EquationClient',['../equation__client_8h.html#a7a697a53acd300a5e3d758b5b4b23067',1,'equation_client.cpp']]]
+  ['getstring_14',['GetString',['../io_8h.html#a73719d48d2aea7babce30f808a573e69',1,'io.cpp']]]
 ];

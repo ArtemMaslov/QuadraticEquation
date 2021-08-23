@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['setcolor_47',['SetColor',['../test_8h.html#a0ff4e8648c47a0a2601df3ab64e3cf35',1,'test.h']]],
-  ['solution_48',['Solution',['../struct_solution.html',1,'']]],
-  ['solutiontype_49',['SolutionType',['../config_8h.html#a24786ec97b9c06c9dcd291a7002c71dc',1,'config.h']]],
-  ['solve_2eh_50',['solve.h',['../solve_8h.html',1,'']]],
-  ['solvetask_51',['SolveTask',['../solve_8h.html#a77076910542bdfe82e69b13d887ad90b',1,'solve.cpp']]]
+  ['x1_42',['x1',['../struct_solution.html#af969d941ce8de36541665b00dc14a800',1,'Solution']]],
+  ['x2_43',['x2',['../struct_solution.html#a3424c236d2f9f3d98762ad7644acc542',1,'Solution']]],
+  ['x_5f0_44',['X_0',['../config_8h.html#a3a023c0c27667e78ae521eb64f1c7c81aede401240ee2cf1db480bf9badd8ddbf',1,'config.h']]],
+  ['x_5f1_45',['X_1',['../config_8h.html#a3a023c0c27667e78ae521eb64f1c7c81a49231d015545580eef601ea3e899c861',1,'config.h']]],
+  ['x_5f2_46',['X_2',['../config_8h.html#a3a023c0c27667e78ae521eb64f1c7c81afb1ad5b9d7a341b50dc940a24fa67b9a',1,'config.h']]]
 ];

@@ -1,12 +1,13 @@
 ﻿#include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <Windows.h>
 #include <cmath>
 
 #include "..\inc\io.h"
 #include "..\inc\solve.h"
 
-char* GetString(char* buffer, int length, FILE* stream)
+char* GetString(char* buffer, const int length, FILE* stream)
 {
     assert(buffer);
     assert(stream);
@@ -18,7 +19,7 @@ char* GetString(char* buffer, int length, FILE* stream)
 
     if (result)
     {
-        if (strcmp(buffer, "\n") == 0)//Пустая строка, завершаем программу
+        if (strcmp(buffer, "\n") == 0)//Empty string, programm must be closed
             return nullptr;
 
         index = strchr(buffer, '\n');
@@ -27,7 +28,10 @@ char* GetString(char* buffer, int length, FILE* stream)
             *index = '\0';
         else
         {
-            printf("\nСтрока слишком длинная, часть строки будет отброшена. Удалось считать:\n%s\n\n", buffer);
+            SetColor(RED, BLACK);
+            puts("\nEntered string is too big, part of it will be ignored. Correctly readed:");
+            printf("%s\n\n", buffer);
+            SetColor(WHITE, BLACK);
 
             while (getchar() != '\n')
                 continue;
@@ -37,18 +41,31 @@ char* GetString(char* buffer, int length, FILE* stream)
 }
 
 
-void PrintSolution(Solution* solution)
+void PrintSolution(const Solution* solution)
 {
     assert(solution);
 
-    SolutionType type = solution->type;
-
-    if (type == NO_SOLUTIONS)
+    SetColor(GREEN, BLACK);
+    switch (solution->type)
+    {
+    case NO_SOLUTIONS:
         printf(NO_SLN);
-    else if (type == ONE_SOLUTION)
+        break;
+    case ONE_SOLUTION:
         printf(ONE_SLN(solution->x1));
-    else if (type == TWO_SOLUTIONS)
+        break;
+    case TWO_SOLUTIONS:
         printf(TWO_SLN(solution->x1, solution->x2));
-    else if (type == INF_SOLUTIONS)
+        break;
+    case INF_SOLUTIONS:
         printf(INF_SLN);
+        break;
+    }
+    SetColor(WHITE, BLACK);
+}
+
+void SetColor(const int text, const int background)
+{
+    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hStdOut, ((background & 0xf) << 4) | (text & 0xf));
 }
