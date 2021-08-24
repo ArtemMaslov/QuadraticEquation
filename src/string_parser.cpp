@@ -4,20 +4,38 @@
 #include <cmath>
 #include <assert.h>
 
-#include "..\inc\parse.h"
+#include "..\inc\data_model.h"
 #include "..\inc\io.h"
+#include "..\inc\utility_functions.h"
+
+static bool ParseEnding(const char** buffer);
+static int ParseNextParam(const char** buffer, char* paramName);
+static bool ParseNextNumber(const char** buffer, double* number);
+static double ConvertToDouble(const char* start, const char* end);
+static void ParamWarning(int paramType, double oldNumber, double newNumber);
+static bool IsSeparator(const char c);
+static bool IsSign(const char c);
+
 //***\\---//***\\-----//***\\---//***\\
 
-Coefficients* ParseString(const char* buffer, Coefficients* params)
+/*
+* Examples of correct input:
+*   x^2-2x+3=0
+*   x^2-4=0
+*   543x-12x^2+812=0
+*   9341-12x=0
+*/
+
+bool ParseString(const char* buffer, Coefficients* params)
 {
     assert(buffer);
     assert(params);
 
-    ParseFlags flags = { 0, 0, 0 };
+    bool flags[MaxCoefficientsCount] = { false };
 
-    double     number    = 0;
-    ParamType* paramType = nullptr;
-    char       paramName = '\0';
+    double number = 0;
+    int paramType = 0;
+    char paramName = '\0';
 
     while (*buffer)
     {
@@ -30,58 +48,47 @@ Coefficients* ParseString(const char* buffer, Coefficients* params)
         if (*buffer == '=')
         {
             (buffer)++;
-            ParseEnding(&buffer);
-            return params;
+            return ParseEnding(&buffer);
         }
 
         bool numberParsed = ParseNextNumber(&buffer, &number);
         if (numberParsed == false)
-            return nullptr;
+            return false;
 
         paramType = ParseNextParam(&buffer, &paramName);
-        if (paramType == nullptr)
-            return nullptr;
+        if(paramType < 0)
+            return false;
 
-        switch (*paramType)
-        {
-        case X_0:
-            if (flags.cInited)
-                ParamWarning(*paramType, params->c, number);
-            params->c     = number;
-            flags.cInited = true;
-            break;
-        case X_1:
-            if (flags.bInited)
-                ParamWarning(*paramType, params->b, number);
-            params->b     = number;
-            flags.bInited = true;
-            break;
-        case X_2:
-            if (flags.aInited)
-                ParamWarning(*paramType, params->a, number);
-            params->a     = number;
-            flags.aInited = true;
-            break;
-        default:
-            return nullptr;
-        }
+        if(flags[paramType])
+            ParamWarning(paramType, params->coeff[paramType], number);
+        params->coeff[paramType] = number;
+        flags[paramType] = true;
 
         number = 0;
     }
     SetColor(RED, BLACK);
     puts("Input error. There is no '=' in the input string.\n");
     SetColor(WHITE, BLACK);
-    return nullptr;
+    return false;
 }
 
 //***\\---//***\\-----//***\\---//***\\
 
-bool ParseEnding(const char** buffer)
+/**
+* \brief Function for processing the end of a line.
+*
+* The function processes characters after the '=' sign. Issues a warning if the input does not end with "=0".
+*
+* \param[in] buffer Input string.
+*
+* \return false in case of an error, true in case of correct exit.
+*/
+static bool ParseEnding(const char** buffer)
 {
     assert(buffer);
     assert(*buffer);
 
-    bool warning    = false;
+    bool warning = false;
 
     while (**buffer)
     {
@@ -118,13 +125,24 @@ bool ParseEnding(const char** buffer)
 
 //***\\---//***\\-----//***\\---//***\\
 
-ParamType* ParseNextParam(const char** buffer, char* paramName)
+/**
+* \brief The function searches a next parameter in the string.
+*
+* The function searches in the line the first parameter from the left and
+* sets the buffer pointer to the next symbol in the line.
+*
+* \param[in] paramName Parameter symbol (a, b, x, ...), met before in the line. '\0' if the function is called for the first time.
+* \param[in] buffer Input string.
+*
+* \return Degree of parameter, -1 in case of an error.
+*/
+static int ParseNextParam(const char** buffer, char* paramName)
 {
     assert(buffer);
     assert(*buffer);
     assert(paramName);
 
-    ParamType paramType = X_0;
+    int paramType = 0;
 
     while (**buffer)
     {
@@ -143,9 +161,9 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
                 SetColor(RED, BLACK);
                 printf("Enter only single-symbol parameter. Entered parameter '%c' is wrong, use '%c' instead.\n\n", **buffer, * paramName);
                 SetColor(WHITE, BLACK);
-                return nullptr;
+                return -1;
             }
-            paramType = X_1;
+            paramType = 1;
         }
         else if (**buffer == '^')
         {
@@ -163,27 +181,20 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
                 SetColor(RED, BLACK);
                 printf("Enter only decimal numbers for parameter power. Power %lg is wrong.\n\n", power);
                 SetColor(WHITE, BLACK);
-                return nullptr;
+                return -1;
             }
 
-            switch (ipower)
+            if (0 <= ipower && ipower <= 2)
             {
-            case 0:
-                paramType = X_0;
-                break;
-            case 1:
-                paramType = X_1;
-                break;
-            case 2:
-                paramType = X_2;
-                break;
-            default:
-                SetColor(RED, BLACK);
-                printf("Programm can solve only quadratic equations. Power %lg is wrong.\n\n", power);
-                SetColor(WHITE, BLACK);
-                return nullptr;
+                return ipower;
             }
-            break;
+            else
+            {
+                SetColor(RED, BLACK);
+                printf("Program can solve only quadratic equations. Power %lg is wrong.\n\n", power);
+                SetColor(WHITE, BLACK);
+                return -1;
+            }
         }
         else if (IsSign(**buffer) || **buffer == '=')
         {
@@ -194,18 +205,29 @@ ParamType* ParseNextParam(const char** buffer, char* paramName)
             SetColor(RED, BLACK);
             printf("Input error. Incorrect symbol '%c'.\n\n", **buffer);
             SetColor(WHITE, BLACK);
-            return nullptr;
+            return -1;
         }
 
         (*buffer)++;
     }
 
-    return &paramType;
+    return paramType;
 }
 
 //***\\---//***\\-----//***\\---//***\\
 
-bool ParseNextNumber(const char** buffer, double* number)
+/**
+* \brief The function searches a next number in the string.
+*
+* The function searches in the string the first number from the left and
+* sets the buffer pointer to the next symbol in the string.
+*
+* \param[in]  buffer Input string.
+* \param[out] number Pointer to a number in the string.
+*
+* \return false in case of an error, true in case of correct exit.
+*/
+static bool ParseNextNumber(const char** buffer, double* number)
 {
     assert(buffer);
     assert(*buffer);
@@ -278,7 +300,17 @@ bool ParseNextNumber(const char** buffer, double* number)
 
 //***\\---//***\\-----//***\\---//***\\
 
-double ConvertToDouble(const char* start, const char* end)
+/**
+* \brief Function for converting a string of digits to double.
+*
+* The function converts a string of digits to a double.
+*
+* \param[in] start Pointer to the first character of the number.
+* \param[in] end   Pointer to the last character of the number.
+*
+* \return The received number.
+*/
+static double ConvertToDouble(const char* start, const char* end)
 {
     assert(start);
     assert(end);
@@ -311,7 +343,7 @@ double ConvertToDouble(const char* start, const char* end)
                     {
                         SetColor(RED, BLACK);
                         printf("The number entered with too high accuracy, it will be shorten to %lg. It's possible to enter only %d digits after separator.\n\n",
-                            snumber, number / k, digitsAfterSeparator);
+                             number / k, digitsAfterSeparator);
                         SetColor(WHITE, BLACK);
                     }
                     break;
@@ -334,44 +366,63 @@ double ConvertToDouble(const char* start, const char* end)
 
 //***\\---//***\\-----//***\\---//***\\
 
-void ParamWarning(const ParamType paramType, const double oldNumber, const double newNumber)
+/**
+* \brief Function displays a warning about the double use of parameters.
+*
+* The function displays a warning that two parameters have been entered.
+* For example, in input `2x+10x-1=0` function will output that the value `2x` will be ignored.
+*
+* \param[in] paramType Parameter type (x^2, x or free member).
+* \param[in] oldNumber The old value of the parameter.
+* \param[in] newNumber The new value of the parameter.
+*/
+static void ParamWarning(int paramType, double oldNumber, double newNumber)
 {
     switch (paramType)
     {
-    case X_0:
+    case 0:
         SetColor(YELLOW, BLACK);
         printf("Enter only one free member of equation. Old value of free member %lg replaced with new value %lg\n",
             oldNumber, newNumber);
         SetColor(WHITE, BLACK);
         break;
-    case X_1:
+    case 1:
         SetColor(YELLOW, BLACK);
         printf("Enter only one 'x' member of equation. Old value of 'x' member %lg replaced with new value %lg\n",
             oldNumber, newNumber);
         SetColor(WHITE, BLACK);
         break;
-    case X_2:
+    default:
         SetColor(YELLOW, BLACK);
-        printf("Enter only one 'x^2' member of equation. Old value of 'x^2' member %lg replaced with new value %lg\n",
-            oldNumber, newNumber);
+        printf("Enter only one 'x^%d' member of equation. Old value of 'x^%d' member %lg replaced with new value %lg\n",
+            paramType, paramType, oldNumber, newNumber);
         SetColor(WHITE, BLACK);
         break;
     }
 }
 
-//***\\---//***\\-----//***\\---//***\\
 
-bool IsSeparator(const char c)
+/**
+* \brief Function that determines wheter a character is a separator.
+*
+* \param[in] c The checked character.
+*
+* \return true, if the character is a dot or comma.
+*/
+static bool IsSeparator(const char c)
 {
     return (c == '.' || c == ',');
 }
 
-bool CompareNumbers(const double a, const double b)
-{
-    return (fabs(a - b) < MinCompareValue);
-}
 
-bool IsSign(const char c)
+/**
+* \brief Function that determines wheter the character is '+' or '-'.
+*
+* \param[in] c The checked character.
+*
+* \return true, if the character is '+' or '-'.
+*/
+static bool IsSign(const char c)
 {
     return c == '-' || c == '+';
 }

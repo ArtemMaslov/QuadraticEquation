@@ -8,7 +8,26 @@
 #ifndef IO_H_
 #define IO_H_
 
-#include "config.h"
+/// Text and background colors for console
+enum ConsoleColors
+{
+    BLACK = 0,
+    DARK_BLUE = 1,
+    DARK_GREEN = 2,
+    DARK_CYAN = 3,
+    DARK_RED = 4,
+    DARK_VIOLET = 5,
+    DARK_YELLOW = 6,
+    DARK_WHITE = 7,
+    GREY = 8,
+    BLUE = 9,
+    GREEN = 10,
+    CYAN = 11,
+    RED = 12,
+    VIOLET = 13,
+    YELLOW = 14,
+    WHITE = 15
+};
 
 /**
 * \brief Input reading function.
@@ -25,14 +44,6 @@
 * \return nullptr in case of error, else pointer to readed string
 */
 char* GetString(char* buffer, const int length, FILE* stream);
-
-
-/**
-* \brief The function outputs the roots of the equation.
-*
-* \param[in] params Coefficients of the quadratic equation.
-*/
-void PrintSolution(const Solution* params);
 
 /**
 * \brief Set color for text and background in console

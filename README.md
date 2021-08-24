@@ -1,26 +1,23 @@
-# QuadraticEquation
-QuadraticEquation is the programm, which solves quadratic equations :)
-1. [Usage](#usage)
-2. [Input rules](#input-rules)
-3. [Compilation](#compilation)
-4. [Documentation](#documentation)
+﻿# QuadraticEquation
+QuadraticEquation это программа, решающая квадратные уравнения.
+1. [Использование](#использование)
+2. [Правила ввода](#правила-ввода)
+3. [Документация](#документация)
 
-### Usage
-* Open folder `Release` and run the `QuadraticEquation.exe`.
-* The console will be opened.
-<p align="center">
-    <img src="images/Console.PNG" alt="Console image" width="500"/>
-</p>
+### Использование
+* Скачать папки исходного кода `src` и `inc`.
+* Создать новый пустой c++ проект в Microsoft Visual Studio.
+* Добавить в проект папки `src` и `inc` с файлами исходного кода.
+* Скомпилировать проект `Build->Build Solution`.
+* Можно использовать другой компилятор, но возможны непредвиденные ошибки.
+* После компиляции и запуска программы, необходимо следовать инструкциям в консоли.
 
-### Input rules
-* The equation must be entered if the form `ax^2 + bx + c = 0`.
-* Entered numbers could contain only 6 digit after separator, else the programm prints warning. To increase digits after separator change Epsilon constant.
-* The dot `.` and comma `,` could be the decimal separator.
-* Multiplication '*' and division '/' symbols are not allowed in the input string. Input `2*x-1=0` is not correct, but `2x-1=0` is correct.
-* Each coefficient of quadratic equation can occur only once, otherwise the last one will be use in the calculatios. For example, in the input `2x^2-3x+10x-13=0` member `-3x` will be ignored and this input qual to `2x^2+10x-13=0`.
+### Правила ввода
+* Квадратное уравнение должно вводиться в приведённом виде `ax^2 + bx + c = 0`.
+* Числа должны вводиться с не более 6 цифрами после запятой. Чтобы увеличить количество цифр после запятой, нужно изменить константу `MinCompareValue` в файле `config.h`.
+* Десятичным разделителем может быть точка `.` или запятая `,`.
+* Знаки умножения `*` и деления `/` не должны присутствовать в входной строке. Например, ввод `2*x-1=0` является ошибочным, вместо этого нужно писать `2x-1=0`.
+* Нельзя использовать более одного квадратичного члена. Например, в вводе `2x^2-3x+10x-13=0` член `-3x` будет проигнорирован, то есть входная строка эквивалентна `2x^2+10x-13=0`.
 
-### Compilation
-The project is small so a compilation will not be difficult :) (all source code files are avaliable in the `src` folder).
-
-### Documentation
-Open file with documentation `html\index.html`.
+### Документация
+Чтобы открыть html документацию, нужно запустить файл `html\index.html`.

@@ -8,9 +8,10 @@
 #ifndef TEST_H_
 #define TEST_H_
 
-#include "config.h"
-
 #ifdef UNIT_TESTS
+
+#include "config.h"
+#include "data_model.h"
 
 const int TestMaxLength = 100;
 
@@ -19,16 +20,16 @@ const size_t TestsCount = 8;
 const Coefficients SolveTaskInput[TestsCount] =
 {
     {0.0, 0.0, 0.0},
-    {0.0, 0.0, 1.0},
+    {1.0, 0.0, 0.0},
 
     {0.0, 1.0, 0.0},
-    {0.0, 1.0, 1.0},
+    {1.0, 1.0, 0.0},
 
-    {1.0, 0.0, 0.0},
+    {0.0, 0.0, 1.0},
     {1.0, 0.0, 1.0},
 
-    {1.0, 1.0, 0.0},
-    {1.0, 1.0, -2.0},
+    {0.0, 1.0, 1.0},
+    {-2.0, 1.0, 1.0},
 };
 
 const Solution SolveTaskAnswers[TestsCount] =
@@ -42,13 +43,12 @@ const Solution SolveTaskAnswers[TestsCount] =
     {0.0,  0.0, ONE_SOLUTION},
     {0.0,  0.0, NO_SOLUTIONS},
 
-    {0.0, -1.0, TWO_SOLUTIONS},
+    {-1.0, 0.0, TWO_SOLUTIONS},
     {1.0, -2.0, TWO_SOLUTIONS},
 };
 
 /// \brief Unit test for SolveTask().
 void TestSolveTask();
-
 
 /**
 * \brief Function determines wheter roots are equal.

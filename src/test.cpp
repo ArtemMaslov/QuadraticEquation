@@ -5,30 +5,31 @@
 #include <Windows.h>
 #include <stdio.h>
 
-#include "..\inc\solve.h"
+#include "..\inc\equation_solver.h"
 #include "..\inc\io.h"
 #include "..\inc\test.h"
 
 void TestSolveTask()
 {
-    for (size_t st = 0; st < TestsCount; st++)
+    for (int st = 0; st < TestsCount; st++)
     {
-        Solution roots = SolveTask(SolveTaskInput + st);
+        Solution roots = {{0}, 0};
+        SolveTask(SolveTaskInput + st, &roots);
 
         if (CompareRoots(roots, SolveTaskAnswers[st]) == false)
         {
             SetColor(RED, BLACK);
-            printf("\nTest №%d failed.\n"
+            printf("\nTest #%d failed.\n"
                 "Correct answer x1 = %lg, x2 = %lg, type = %d.\n"
-                "Programm answered x1 = %lg, x2 = %lg, type = %d.\n",
+                "Program answered x1 = %lg, x2 = %lg, type = %d.\n",
                 st + 1, 
-                SolveTaskAnswers[st].x1, SolveTaskAnswers[st].x2, SolveTaskAnswers[st].type,
-                roots.x1,                roots.x2,                roots.type);
+                SolveTaskAnswers[st].solutions[0], SolveTaskAnswers[st].solutions[1], SolveTaskAnswers[st].SolutionsCount,
+                roots.solutions[0],                roots.solutions[1],                roots.SolutionsCount);
         }
         else
         {
             SetColor(GREEN, BLACK);
-            printf("Test №%d passed.\n", st + 1);
+            printf("Test #%d passed.\n", st + 1);
         }
     }
     SetColor(WHITE, BLACK);
@@ -36,7 +37,19 @@ void TestSolveTask()
 
 bool CompareRoots(const Solution r1, const  Solution r2)
 {
-    return (r1.type == r2.type && (r1.x1 == r2.x1 && r1.x2 == r2.x2 || r1.x1 == r2.x2 && r1.x2 == r2.x1));
+    bool res = true;
+    if (r1.SolutionsCount == r2.SolutionsCount)
+    {
+        for (int st = 0; st < r1.SolutionsCount; st++)
+            if (r1.solutions[st] != r2.solutions[st])
+            {
+                res = false;
+                break;
+            }
+    }
+    else
+        res = false;
+    return res;
 }
 
 

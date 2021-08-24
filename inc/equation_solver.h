@@ -1,6 +1,6 @@
 /**
 * \file
-* \brief Solver functions file
+* \brief Equation solver functions file
 * \author Maslov Artem
 * \version 1.0.0.0
 * \date 20 August 2021
@@ -8,7 +8,7 @@
 #ifndef SOLVE_H_
 #define SOLVE_H_
 
-#include "config.h"
+#include "data_model.h"
 
 #define NO_SLN              "No solutions.\n\n"
 #define ONE_SLN(ans)        "Equation has one solution: x = %lg\n\n", ans
@@ -28,7 +28,7 @@
 * 
 * \return A structure with the roots of the equation.
 */
-Solution SolveTask(const Coefficients* params);
+void SolveTask(const Coefficients* params, Solution* solution);
 
 /**
  * \brief Function calculates discriminant of the quadratic equation.
@@ -39,14 +39,15 @@ Solution SolveTask(const Coefficients* params);
 */
 double CalculateDiscriminant(const double a, const double b, const double c);
 
-
 /**
-* \brief Function determines wheter the number is zero.
+* \brief The function outputs the roots of the equation.
 *
-* \params[in] number The number being checked
-* 
-* \return true if number is zero.
+* \param[in] params Coefficients of the quadratic equation.
 */
-double IsZero(const double number);
+void PrintSolution(const Solution* params);
+
+int SolveLinearEquation(double a, double b, double* sln);
+
+int SimpleSolveQuadraticEquation(double a, double b, double c, double* sln1, double* sln2);
 
 #endif // !SOLVE_H_
