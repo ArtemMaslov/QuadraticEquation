@@ -1,4 +1,4 @@
-﻿/**
+/**
 * \file
 * \brief Input, output functions file
 * \author Maslov Artem

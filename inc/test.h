@@ -1,4 +1,4 @@
-﻿/**
+/**
 * \file
 * \brief Test functions file
 * \author Maslov Artem
